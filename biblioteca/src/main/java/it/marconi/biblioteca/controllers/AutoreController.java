@@ -8,12 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.Operation;
 import it.marconi.biblioteca.domain.AutoreDTO;
+import it.marconi.biblioteca.domain.LibroDTO;
 import it.marconi.biblioteca.services.AutoreService;
 import it.marconi.biblioteca.services.LibroService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/autori")
@@ -26,11 +30,13 @@ public class AutoreController {
     AutoreService autoreService;
 
     @GetMapping
+    @Operation(summary = "Recupera tutti gli autori")
     public List<AutoreDTO> getAll() {
         return autoreService.findAll();
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Cerca un autore dato il suo ID")
     public ResponseEntity<AutoreDTO> getAutore(@PathVariable Integer id) {
 
         Optional<AutoreDTO> autore = autoreService.getById(id);
@@ -44,8 +50,19 @@ public class AutoreController {
         //     orElseThrow(() -> new RuntimeException("Autore non trovato"));
     }
 
-    // @PostMapping("/add")
-    // public ResponseEntity<AutoreDTO> addAutore() {
+    @GetMapping("/{id}/libri")
+    @Operation(summary = "Recupera tutti i libri di un dato autore")
+    public List<LibroDTO> getLibriByAutore(@PathVariable Integer id) {
+        
+        return libroService.getByAutoreId(id);
+    }
 
-    // }
+    @PostMapping("/add")
+    @Operation(summary = "Aggiunge un nuovo autore")
+    public ResponseEntity<AutoreDTO> addAutore(@Valid @RequestBody AutoreDTO autore) {
+
+        AutoreDTO salvato = autoreService.save(autore);
+
+        return ResponseEntity.ok(salvato);
+    }
 }
