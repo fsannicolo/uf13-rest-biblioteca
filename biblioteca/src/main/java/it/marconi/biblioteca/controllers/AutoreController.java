@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,5 +65,17 @@ public class AutoreController {
         AutoreDTO salvato = autoreService.save(autore);
 
         return ResponseEntity.ok(salvato);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Rimuove un autore dal database, e anche tutti i suoi libri")
+    public ResponseEntity<String> deleteAutore(@PathVariable Integer id) {
+
+        boolean deleted = autoreService.deleteById(id);
+
+        if (deleted)
+            return ResponseEntity.ok("Autore eliminato correttamente!");
+        else
+            return ResponseEntity.notFound().build();
     }
 }

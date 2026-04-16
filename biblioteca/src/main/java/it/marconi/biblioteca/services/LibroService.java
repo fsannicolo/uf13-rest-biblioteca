@@ -1,9 +1,11 @@
 package it.marconi.biblioteca.services;
 
+import it.marconi.biblioteca.controllers.AutoreController;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import it.marconi.biblioteca.domain.Autore;
@@ -15,7 +17,7 @@ import it.marconi.biblioteca.repositories.LibroRepository;
 
 @Service
 public class LibroService {
-    
+
     @Autowired
     private LibroRepository libroRepo;
 
@@ -49,15 +51,35 @@ public class LibroService {
         return libroRepo.findByAutoreId(autoreId).stream().map(mapper::toDto).toList();
     }
 
-    public LibroDTO save(LibroDTO libro) {
+    public Optional<LibroDTO> save(LibroDTO libro) {
+
+        Optional<Autore> autore = autoreRepo.findById(libro.autore());
+        
+        if (autore.isPresent()) {
+            Autore a = autore.get();
+            Libro entity = mapper.toEntity(libro, a);
+            entity = libroRepo.save(entity);
+            return Optional.of(mapper.toDto(entity));
+        }
+        else
+            return Optional.empty();
 
         // cerco l'autore nel db da associare al libro
-        Autore autore = autoreRepo.findById(libro.autore()).
-            orElseThrow(() -> new RuntimeException("Autore non trovato"));
+        // Autore autore = autoreRepo.findById(libro.autore()).
+        //     orElseThrow(() -> new RuntimeException("Autore non trovato"));
 
-        Libro entity = mapper.toEntity(libro, autore);
-        entity = libroRepo.save(entity);
-        return mapper.toDto(entity);
+        // Libro entity = mapper.toEntity(libro, autore);
+        // entity = libroRepo.save(entity);
+        // return mapper.toDto(entity);
+    }
+
+    public boolean deleteByIsbn(String isbn) {
+
+        if (libroRepo.existsById(isbn)) {
+            libroRepo.deleteById(isbn);
+            return true;
+        }
+        return false;
     }
 
 }

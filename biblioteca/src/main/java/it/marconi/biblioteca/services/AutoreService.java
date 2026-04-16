@@ -37,4 +37,12 @@ public class AutoreService {
 
         return autoreRepo.findById(id).map(autore -> mapper.toDto(autore));
     }
+
+    public boolean deleteById(int id) {
+        if (autoreRepo.existsById(id)) {
+            autoreRepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
 }
