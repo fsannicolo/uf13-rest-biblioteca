@@ -44,6 +44,7 @@ public class Autore {
     private List<Libro> libri = new ArrayList<>();
 
     // metodo handler
+    // FIXME: Segna come non utilizzato, da capire dove usarlo
     public void addLibro(Libro libro) {
         libri.add(libro);
         libro.setAutore(this); 
