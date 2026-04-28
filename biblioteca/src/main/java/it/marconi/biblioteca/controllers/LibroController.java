@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import it.marconi.biblioteca.domain.generics.APIResponse;
-import it.marconi.biblioteca.domain.libro.Libro;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,7 +20,6 @@ import it.marconi.biblioteca.domain.libro.LibroDTO;
 import it.marconi.biblioteca.services.LibroService;
 import jakarta.validation.Valid;
 
-import javax.swing.text.html.Option;
 
 @RestController
 @RequestMapping("/libri")
