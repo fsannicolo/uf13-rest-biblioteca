@@ -1,5 +1,6 @@
-package it.marconi.biblioteca.domain;
+package it.marconi.biblioteca.domain.libro;
 
+import it.marconi.biblioteca.domain.autore.Autore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

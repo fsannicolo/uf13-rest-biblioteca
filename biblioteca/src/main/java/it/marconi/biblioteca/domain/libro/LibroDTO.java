@@ -1,4 +1,4 @@
-package it.marconi.biblioteca.domain;
+package it.marconi.biblioteca.domain.libro;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

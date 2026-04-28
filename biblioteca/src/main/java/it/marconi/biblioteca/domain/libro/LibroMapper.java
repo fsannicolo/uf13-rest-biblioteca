@@ -1,5 +1,6 @@
-package it.marconi.biblioteca.domain;
+package it.marconi.biblioteca.domain.libro;
 
+import it.marconi.biblioteca.domain.autore.Autore;
 import org.springframework.stereotype.Component;
 
 @Component
