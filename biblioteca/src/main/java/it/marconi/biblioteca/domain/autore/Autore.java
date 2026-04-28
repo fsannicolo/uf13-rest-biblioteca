@@ -1,8 +1,9 @@
-package it.marconi.biblioteca.domain;
+package it.marconi.biblioteca.domain.autore;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import it.marconi.biblioteca.domain.libro.Libro;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,6 +44,7 @@ public class Autore {
     private List<Libro> libri = new ArrayList<>();
 
     // metodo handler
+    // FIXME: Segna come non utilizzato, da capire dove usarlo
     public void addLibro(Libro libro) {
         libri.add(libro);
         libro.setAutore(this); 

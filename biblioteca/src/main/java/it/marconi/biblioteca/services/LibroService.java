@@ -1,19 +1,19 @@
 package it.marconi.biblioteca.services;
 
-import it.marconi.biblioteca.controllers.AutoreController;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import it.marconi.biblioteca.domain.Autore;
-import it.marconi.biblioteca.domain.Libro;
-import it.marconi.biblioteca.domain.LibroDTO;
-import it.marconi.biblioteca.domain.LibroMapper;
+import it.marconi.biblioteca.domain.autore.Autore;
+import it.marconi.biblioteca.domain.libro.Libro;
+import it.marconi.biblioteca.domain.libro.LibroDTO;
+import it.marconi.biblioteca.domain.libro.LibroMapper;
 import it.marconi.biblioteca.repositories.AutoreRepository;
 import it.marconi.biblioteca.repositories.LibroRepository;
+import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class LibroService {
@@ -73,13 +73,15 @@ public class LibroService {
         // return mapper.toDto(entity);
     }
 
-    public boolean deleteByIsbn(String isbn) {
+    public void deleteByIsbn(String isbn) {
+        long deleteCount = libroRepo.deleteLibroByIsbn(isbn);
 
-        if (libroRepo.existsById(isbn)) {
-            libroRepo.deleteById(isbn);
-            return true;
+        if (deleteCount == 0){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Impossibile eliminare: Libro con ISBN " + isbn + " non trovato"
+            );
         }
-        return false;
     }
 
 }

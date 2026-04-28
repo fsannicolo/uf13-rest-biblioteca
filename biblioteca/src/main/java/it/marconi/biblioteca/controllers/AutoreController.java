@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
-import it.marconi.biblioteca.domain.AutoreDTO;
-import it.marconi.biblioteca.domain.LibroDTO;
+import it.marconi.biblioteca.domain.autore.AutoreDTO;
+import it.marconi.biblioteca.domain.libro.LibroDTO;
 import it.marconi.biblioteca.services.AutoreService;
 import it.marconi.biblioteca.services.LibroService;
 import jakarta.validation.Valid;

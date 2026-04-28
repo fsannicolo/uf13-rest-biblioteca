@@ -1,4 +1,4 @@
-package it.marconi.biblioteca.domain;
+package it.marconi.biblioteca.domain.autore;
 
 import jakarta.validation.constraints.NotBlank;
 

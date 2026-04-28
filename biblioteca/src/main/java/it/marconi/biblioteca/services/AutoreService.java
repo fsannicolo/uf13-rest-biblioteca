@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import it.marconi.biblioteca.domain.Autore;
-import it.marconi.biblioteca.domain.AutoreDTO;
-import it.marconi.biblioteca.domain.AutoreMapper;
+import it.marconi.biblioteca.domain.autore.Autore;
+import it.marconi.biblioteca.domain.autore.AutoreDTO;
+import it.marconi.biblioteca.domain.autore.AutoreMapper;
 import it.marconi.biblioteca.repositories.AutoreRepository;
 
 @Service
